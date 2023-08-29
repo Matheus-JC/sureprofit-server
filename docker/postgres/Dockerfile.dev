@@ -1,0 +1,9 @@
+FROM postgres:15.2
+
+ENV POSTGRES_USER=dev_sureprofit
+ENV POSTGRES_PASSWORD=5LYOvddnFdCi
+ENV POSTGRES_DB=sureprofit_server
+
+WORKDIR /var/lib/postgresql/data/
+
+EXPOSE 5432

@@ -1,0 +1,7 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0
+
+WORKDIR /src
+
+ENV ASPNETCORE_ENVIRONMENT=Development
+
+ENTRYPOINT ["dotnet", "watch", "run", "--project=Api/SureProfitServer.Api.csproj", "--urls=http://*:5000"]

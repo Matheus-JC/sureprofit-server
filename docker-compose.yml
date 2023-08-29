@@ -1,0 +1,43 @@
+services:
+  application:
+    image: dev/sureprofit-server/application:1.0
+    container_name: app_sureprofit_server_dev
+    build: 
+      context: ./
+      dockerfile: ./docker/application/Dockerfile.dev
+    volumes:
+      - ./src:/src
+      - /src/Api/obj
+      - /src/Api/bin
+      - /src/Core/Application/obj
+      - /src/Core/Application/bin
+      - /src/Core/Domain/obj
+      - /src/Core/Domain/bin
+      - /src/Infrastructure/Data/obj
+      - /src/Infrastructure/Data/bin
+      - /src/Infrastructure/Components/obj
+      - /src/Infrastructure/Components/bin
+  
+  relational-db:
+    image: dev/sureprofit-server/relational-db:1.0
+    container_name: relational_db_sureprofit_server_dev
+    build: 
+      context: ./
+      dockerfile: ./docker/postgres/Dockerfile.dev
+    ports:
+      - 5432:5432
+    volumes:
+      - ./docker/postgres/dev-data:/var/lib/postgresql/data
+
+  reverse-proxy:
+    image: dev/sureprofit-server/reverse-proxy:1.0
+    container_name: reverse_proxy_sureprofit_server_dev
+    build: 
+      context: ./
+      dockerfile: ./docker/nginx/Dockerfile.dev
+    ports:
+      - 80:80
+
+networks:
+  default:
+    name: sureprofit-server-dev-network

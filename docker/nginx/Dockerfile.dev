@@ -1,0 +1,5 @@
+FROM nginx:1.23.3
+
+COPY docker/nginx/sureprofit-server-dev.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80

@@ -1,0 +1,26 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /src
+
+COPY SureProfitServer.sln .
+COPY src/Api/*.csproj ./Api/
+COPY src/Core/Application/*.csproj ./Core/Application/
+COPY src/Core/Domain/*.csproj ./Core/Domain/
+COPY src/Infrastructure/Data/*.csproj ./Infrastructure/Data/
+COPY src/Infrastructure/Components/*.csproj ./Infrastructure/Components/
+RUN dotnet restore
+
+COPY ./src ./
+
+RUN dotnet publish --output build
+
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
+WORKDIR /app
+COPY --from=build /src/build .
+
+ENV ASPNETCORE_URLS=https://sureprofit.server
+ENV ASPNETCORE_ENVIRONMENT=Production
+
+RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
+USER appuser
+
+ENTRYPOINT ["dotnet", "LisbagServer.Api.dll"]

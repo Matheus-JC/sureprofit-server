@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Controllers;
+namespace Api.Controllers.V1;
 
 [ApiController]
-[Route("[controller]")]
+[Route(Routes.Base)]
+[ApiVersion("1.0")]
 public class TestController : ControllerBase
 {
     [HttpGet]

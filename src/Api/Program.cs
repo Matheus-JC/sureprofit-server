@@ -6,6 +6,13 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// builder.Services.AddAuthentication("Bearer")
+// .AddIdentityServerAuthentication("Bearer", options =>
+// {
+//     options.ApiName = "sureProfitApi";
+//     options.Authority = "https://local.sureprofit.identityprovider:5500";
+// });
+
 builder.Services.AddControllers();
 
 builder.Services.AddApiVersioning(config =>
@@ -52,7 +59,13 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+// app.UseHttpsRedirection();
+
+app.UseRouting();
+
 app.UseAuthorization();
+
+// app.UseAuthentication();
 
 app.MapControllers();
 

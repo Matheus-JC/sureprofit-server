@@ -1,8 +1,9 @@
 ﻿using Bogus;
-using Bogus.Extensions;
 using FluentAssertions;
+using SureProfit.Domain.Common;
+using SureProfit.Domain.Entities;
 
-namespace SureProfit.Domain.Tests;
+namespace SureProfit.Domain.Tests.Entities;
 
 public class CompanyTests
 {

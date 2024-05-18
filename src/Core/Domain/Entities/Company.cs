@@ -1,6 +1,7 @@
 ﻿using SureProfit.Domain.Common;
+using SureProfit.Domain.ValueObjects;
 
-namespace SureProfit.Domain;
+namespace SureProfit.Domain.Entities;
 
 public class Company : Entity
 {

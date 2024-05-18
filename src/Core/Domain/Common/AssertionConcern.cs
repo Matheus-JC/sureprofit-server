@@ -72,17 +72,17 @@ public class AssertionConcern
         }
     }
 
-    public static void AssertArgumentGreaterThanZero(int value, string message)
+    public static void AssertArgumentIsPositive(int value, string message)
     {
-        if (value <= 0)
+        if (value < 0)
         {
             throw new DomainException(message);
         }
     }
 
-    public static void AssertArgumentIsPositive(int value, string message)
+    public static void AssertArgumentGreaterThanZero(int value, string message)
     {
-        if (value < 0)
+        if (value <= 0)
         {
             throw new DomainException(message);
         }

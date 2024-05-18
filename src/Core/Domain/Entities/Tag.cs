@@ -1,6 +1,6 @@
 using SureProfit.Domain.Common;
 
-namespace SureProfit.Domain;
+namespace SureProfit.Domain.Entities;
 
 public class Tag : Entity
 {

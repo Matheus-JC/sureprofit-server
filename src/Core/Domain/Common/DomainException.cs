@@ -1,4 +1,4 @@
-﻿namespace SureProfit.Domain;
+﻿namespace SureProfit.Domain.Common;
 
 public class DomainException : Exception
 {

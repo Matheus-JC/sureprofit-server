@@ -1,6 +1,6 @@
 ﻿using SureProfit.Domain.Common;
 
-namespace SureProfit.Domain;
+namespace SureProfit.Domain.ValueObjects;
 
 public class Cnpj
 {

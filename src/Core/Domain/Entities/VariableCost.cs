@@ -1,20 +1,20 @@
-﻿using SureProfit.Domain.Common;
+using SureProfit.Domain.Common;
 
-namespace SureProfit.Domain;
+namespace SureProfit.Domain.Entities;
 
-public class FixedCost : Entity
+public class VariableCost : Entity
 {
     public string Description { get; private set; } = string.Empty;
     public decimal Value { get; private set; }
     public Tag? Tag { get; private set; }
 
-    public FixedCost(string description, decimal value)
+    public VariableCost(string description, decimal value)
     {
         SetDescription(description);
         SetValue(value);
     }
 
-    public FixedCost(string description, decimal value, Tag tag) : this(description, value)
+    public VariableCost(string description, decimal value, Tag tag) : this(description, value)
     {
         SetTag(tag);
     }
@@ -27,7 +27,7 @@ public class FixedCost : Entity
 
     public void SetValue(decimal value)
     {
-        AssertionConcern.AssertArgumentGreaterThanZero(value, "Value cannot be less than 0");
+        AssertionConcern.AssertArgumentRange(value, 0, 100, "Value is percentage and must be between 0 and 100");
         Value = value;
     }
 

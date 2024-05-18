@@ -1,8 +1,10 @@
 ﻿using Bogus;
 using Bogus.Extensions.Brazil;
 using FluentAssertions;
+using SureProfit.Domain.Common;
+using SureProfit.Domain.ValueObjects;
 
-namespace SureProfit.Domain.Tests;
+namespace SureProfit.Domain.Tests.ValueObjects;
 
 public class CnpjTests
 {

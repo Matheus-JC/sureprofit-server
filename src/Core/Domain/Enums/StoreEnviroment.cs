@@ -1,4 +1,4 @@
-﻿namespace SureProfit.Domain;
+﻿namespace SureProfit.Domain.Enums;
 
 public enum StoreEnviroment
 {

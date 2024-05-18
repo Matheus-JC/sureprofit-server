@@ -1,6 +1,7 @@
 ﻿using SureProfit.Domain.Common;
+using SureProfit.Domain.Enums;
 
-namespace SureProfit.Domain;
+namespace SureProfit.Domain.Entities;
 
 public class Store : Entity
 {

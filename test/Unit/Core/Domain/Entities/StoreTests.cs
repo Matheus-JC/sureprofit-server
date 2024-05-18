@@ -1,7 +1,10 @@
 ﻿using Bogus;
 using FluentAssertions;
+using SureProfit.Domain.Common;
+using SureProfit.Domain.Entities;
+using SureProfit.Domain.Enums;
 
-namespace SureProfit.Domain.Tests;
+namespace SureProfit.Domain.Tests.Entities;
 
 public class StoreTests
 {

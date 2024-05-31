@@ -1,22 +1,39 @@
 ﻿using AutoMapper;
+using SureProfit.Application.Notifications;
+using SureProfit.Domain;
 using SureProfit.Domain.Entities;
-using SureProfit.Domain.Interfaces.Repositories;
+using SureProfit.Domain.Interfaces.Data;
 
 namespace SureProfit.Application;
 
-public class CompanyService(ICompanyRepository companyRepository, IMapper mapper) : ICompanyService
+public class CompanyService(ICompanyRepository companyRepository, IUnitOfWork unitOfWork,
+    INotifier notifier, IMapper mapper
+)
+    : BaseService(unitOfWork, notifier, mapper), ICompanyService
 {
     private readonly ICompanyRepository _companyRepository = companyRepository;
-    private readonly IMapper _mapper = mapper;
 
-    public async Task<Company> GetByIdAsync(Guid id)
+    public async Task<CompanyDto?> GetByIdAsync(Guid id)
     {
-        return await _companyRepository.GetByIdAsync(id);
+        var company = await _companyRepository.GetByIdAsync(id);
+        return _mapper.Map<CompanyDto>(company);
     }
 
-    public async Task CreateAsync(CompanyDto companyDto)
+    public async Task<Guid?> CreateAsync(CompanyDto companyDto)
     {
+        if (!Validate(new CompanyDtoValidator(), companyDto))
+            return null;
+
         var entity = _mapper.Map<Company>(companyDto);
-        await _companyRepository.CreateAsync(entity);
+        _companyRepository.Create(entity);
+
+        await CommitAsync();
+
+        return entity.Id;
+    }
+
+    public void Dispose()
+    {
+        GC.SuppressFinalize(this);
     }
 }

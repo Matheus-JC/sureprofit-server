@@ -1,6 +1,6 @@
 using Asp.Versioning.ApiExplorer;
 
-namespace Api.Configuration.Swagger;
+namespace SureProfit.Api.Configuration.Swagger;
 
 public static class SwaggerCongiration
 {

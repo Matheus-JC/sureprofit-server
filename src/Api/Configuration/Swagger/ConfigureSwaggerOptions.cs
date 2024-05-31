@@ -3,7 +3,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Api.Configuration.Swagger;
+namespace SureProfit.Api.Configuration.Swagger;
+
 public class ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider) : IConfigureOptions<SwaggerGenOptions>
 {
     readonly IApiVersionDescriptionProvider _provider = provider;

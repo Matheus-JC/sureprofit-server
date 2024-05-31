@@ -28,7 +28,7 @@ public class CnpjTests
         var fakeCnpj = CreateRandomCnpjValue()[..^1];
 
         FluentActions.Invoking(() => new Cnpj(fakeCnpj))
-            .Should().Throw<DomainException>().WithMessage($"*{Cnpj.CnpjLength}*");
+            .Should().Throw<DomainException>().WithMessage($"*Invalid*");
     }
 
     [Fact]
@@ -37,7 +37,7 @@ public class CnpjTests
         var fakeCnpj = CreateRandomCnpjValue() + '0';
 
         FluentActions.Invoking(() => new Cnpj(fakeCnpj))
-            .Should().Throw<DomainException>().WithMessage($"*{Cnpj.CnpjLength}*");
+            .Should().Throw<DomainException>().WithMessage($"*Invalid*");
     }
 
     [Fact]

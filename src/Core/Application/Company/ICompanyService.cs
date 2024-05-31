@@ -2,8 +2,8 @@
 
 namespace SureProfit.Application;
 
-public interface ICompanyService
+public interface ICompanyService : IDisposable
 {
-    Task<Company> GetByIdAsync(Guid id);
-    Task CreateAsync(CompanyDto company);
+    Task<CompanyDto?> GetByIdAsync(Guid id);
+    Task<Guid?> CreateAsync(CompanyDto company);
 }

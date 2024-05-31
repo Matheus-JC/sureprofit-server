@@ -18,13 +18,20 @@ public class Company : Entity
 
     public Company(string name, string cnpj) : this(name)
     {
-        Cnpj = new Cnpj(cnpj);
+        SetCnpj(cnpj);
     }
+
+    protected Company() { }
 
     public void SetName(string name)
     {
         AssertionConcern.AssertArgumentNotEmpty(name, "Name cannot be empty");
         Name = name;
+    }
+
+    public void SetCnpj(string cnpj)
+    {
+        Cnpj = new Cnpj(cnpj);
     }
 
     public void AddStore(Store store)

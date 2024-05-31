@@ -1,6 +1,6 @@
 using Asp.Versioning;
 
-namespace Api.Configuration;
+namespace SureProfit.Api.Configuration;
 
 public static class VersioningConfiguration
 {

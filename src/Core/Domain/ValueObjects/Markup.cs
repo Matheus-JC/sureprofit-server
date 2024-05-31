@@ -2,7 +2,7 @@
 
 namespace SureProfit.Domain.ValueObjects;
 
-public class Markup
+public record Markup
 {
     public decimal Value { get; private set; }
 

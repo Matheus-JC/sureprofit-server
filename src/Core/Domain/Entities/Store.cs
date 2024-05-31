@@ -6,8 +6,11 @@ namespace SureProfit.Domain.Entities;
 public class Store : Entity
 {
     public string Name { get; private set; } = string.Empty;
-    public decimal? TargetProfit { get; private set; }
     public StoreEnviroment Enviroment { get; private set; }
+    public decimal? TargetProfit { get; private set; }
+    public Company? Company { get; private set; }
+    private readonly List<Cost> _costs = [];
+    public IReadOnlyCollection<Cost> Costs => _costs;
 
     public Store(string name, StoreEnviroment enviroment)
     {
@@ -15,10 +18,7 @@ public class Store : Entity
         SetEnviroment(enviroment);
     }
 
-    public Store(string name, StoreEnviroment enviroment, decimal targetProfit) : this(name, enviroment)
-    {
-        SetTargetProfit(targetProfit);
-    }
+    public Store() { }
 
     public void SetName(string name)
     {
@@ -35,5 +35,10 @@ public class Store : Entity
     public void SetEnviroment(StoreEnviroment enviroment)
     {
         Enviroment = enviroment;
+    }
+
+    public void SetCompany(Company company)
+    {
+        Company = company;
     }
 }

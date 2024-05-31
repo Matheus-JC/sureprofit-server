@@ -6,13 +6,13 @@ using SureProfit.Application.Mappings;
 
 namespace SureProfit.Application.Tests;
 
-public class ServiceFixture : IDisposable
+public abstract class ServiceBaseTests : IDisposable
 {
-    public readonly Faker Faker = new("en_US");
-    public readonly AutoMocker Mocker = new();
-    public readonly IMapper Mapper;
+    protected readonly Faker Faker = new("en_US");
+    protected readonly AutoMocker Mocker = new();
+    protected readonly IMapper Mapper;
 
-    public ServiceFixture()
+    protected ServiceBaseTests()
     {
         var config = new MapperConfiguration(cfg =>
         {

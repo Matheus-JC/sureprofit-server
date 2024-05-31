@@ -13,6 +13,8 @@ public class Tag : Entity
         Activate();
     }
 
+    public Tag() { }
+
     public void SetName(string name)
     {
         AssertionConcern.AssertArgumentNotEmpty(name, "Name cannot be empty");

@@ -30,8 +30,4 @@
     <ProjectReference Include="..\..\..\..\src\Core\Domain\SureProfit.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Entities/" />
-  </ItemGroup>
-
 </Project>

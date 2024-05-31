@@ -77,4 +77,15 @@ public class StoreTests
 
         store.Enviroment.Should().Be(enviroment);
     }
+
+    [Fact]
+    public void SetCompany_WithValidInput_ShouldSetCompanyAndCompanyId()
+    {
+        var store = CreateStore();
+        var company = new Company(_faker.Company.CompanyName());
+
+        store.SetCompany(company);
+
+        store.Company.Should().Be(company);
+    }
 }

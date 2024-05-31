@@ -2,15 +2,15 @@
 
 namespace SureProfit.Domain.ValueObjects;
 
-public class Cnpj
+public record Cnpj
 {
     public const int CnpjLength = 14;
-    public string Value { get; private set; }
+    public string Value { get; private set; } = string.Empty;
+
+    protected Cnpj() { }
 
     public Cnpj(string cnpj)
     {
-        AssertionConcern.AssertArgumentLength(cnpj, CnpjLength, CnpjLength, $"CNPJ must have {CnpjLength} characters");
-
         if (!IsValid(cnpj))
         {
             throw new DomainException("Invalid CNPJ");
@@ -19,8 +19,13 @@ public class Cnpj
         Value = cnpj;
     }
 
-    private static bool IsValid(string cnpj)
+    public static bool IsValid(string cnpj)
     {
+        if (cnpj.Length != CnpjLength)
+        {
+            return false;
+        }
+
         int[] multiplier1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
         int[] multiplier2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
 

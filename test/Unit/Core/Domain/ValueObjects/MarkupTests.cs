@@ -1,9 +1,8 @@
-﻿using Bogus;
-using FluentAssertions;
+﻿using FluentAssertions;
 using SureProfit.Domain.Common;
 using SureProfit.Domain.ValueObjects;
 
-namespace SureProfit.Domain.Tests;
+namespace SureProfit.Domain.Tests.ValueObjects;
 
 public class MarkupTests
 {

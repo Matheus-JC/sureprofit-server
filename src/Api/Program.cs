@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SureProfit.Api.Configuration;
 using SureProfit.Api.Configuration.Swagger;
+using SureProfit.Api.Extensions;
 using SureProfit.Application;
 using SureProfit.Application.Mappings;
 using SureProfit.Infra.Data;
@@ -40,5 +41,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.Run();

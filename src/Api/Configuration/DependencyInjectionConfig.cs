@@ -17,6 +17,7 @@ public static class DependencyInjectionConfig
         // Data
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<ICompanyRepository, CompanyRepository>();
+        services.AddScoped<ICnpjUniquenessChecker, CnpjUniquenessChecker>();
 
         return services;
     }

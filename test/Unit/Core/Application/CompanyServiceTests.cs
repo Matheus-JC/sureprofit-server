@@ -1,4 +1,6 @@
-﻿using Bogus.Extensions.Brazil;
+﻿using System.Security.Authentication;
+using Bogus;
+using Bogus.Extensions.Brazil;
 using FluentAssertions;
 using Moq;
 using SureProfit.Application.Notifications;
@@ -18,7 +20,25 @@ public class CompanyServiceTests : ServiceBaseTests
     }
 
     [Fact]
-    public async void GetById_WithValidInput_ShouldReturnExpectedResult()
+    public async void GetAllAsync_ShouldReturnExpectedResult()
+    {
+        //Arrange
+        int companiesCount = 5;
+        var companies = GenerateCompanies(companiesCount);
+
+        Mocker.GetMock<ICompanyRepository>().Setup(r => r.GetAllAsync())
+            .ReturnsAsync(companies);
+
+        // Act
+        var result = await _companyService.GetAllAsync();
+
+        // Assert
+        result.Should().HaveCount(companiesCount);
+        Mocker.GetMock<ICompanyRepository>().Verify(r => r.GetAllAsync(), Times.Once);
+    }
+
+    [Fact]
+    public async void GetByIdAsync_WithValidInput_ShouldReturnExpectedResult()
     {
         // Arrange
         var company = CreateCompany();
@@ -30,7 +50,13 @@ public class CompanyServiceTests : ServiceBaseTests
         var result = await _companyService.GetByIdAsync(company.Id);
 
         // Assert
-        result.Should().Be(company);
+        result.Should().BeEquivalentTo(new CompanyDto
+        {
+            Id = company.Id,
+            Name = company.Name,
+            Cnpj = company.Cnpj?.Value,
+        });
+
         repositoryMock.Verify(r => r.GetByIdAsync(company.Id), Times.Once);
     }
 
@@ -43,13 +69,9 @@ public class CompanyServiceTests : ServiceBaseTests
         var companyDto = CreateCompanyDto(withCnpj);
         var repositoryMock = Mocker.GetMock<ICompanyRepository>();
 
-        repositoryMock.Setup(repo => repo.GetByIdAsync(companyDto.Id))
-            .ReturnsAsync(default(Company));
-
         repositoryMock.Setup(repo => repo.Create(
             It.Is<Company>(comp =>
-                comp.Id == companyDto.Id
-                && comp.Name == companyDto.Name
+                comp.Name == companyDto.Name
                 && (withCnpj ? comp.Cnpj!.Value == companyDto.Cnpj : comp.Cnpj == null)
             )
         ));
@@ -63,25 +85,6 @@ public class CompanyServiceTests : ServiceBaseTests
         Mocker.GetMock<IUnitOfWork>().Verify(wow => wow.CommitAsync(), Times.Once);
     }
 
-    [Fact]
-    public async void CreateAsync_WithCompanyIdAlreadyRegistered_ShouldNotifyError()
-    {
-        // Arrange
-        var companyDto = CreateCompanyDto();
-        Mocker.GetMock<ICompanyRepository>().Setup(service => service.GetByIdAsync(companyDto.Id))
-            .ReturnsAsync(new Company(companyDto.Name));
-        Mocker.GetMock<INotifier>().Setup(n => n.GetNotifications())
-            .Returns([It.IsAny<Notification>()]);
-
-        // Act
-        await _companyService.CreateAsync(companyDto);
-        var test = Mocker.GetMock<INotifier>().Object;
-
-        // Assert
-        Mocker.GetMock<IUnitOfWork>().Verify(wow => wow.CommitAsync(), Times.Never);
-        Mocker.GetMock<INotifier>().Object.GetNotifications().Count.Should().Be(1);
-    }
-
     private CompanyDto CreateCompanyDto(bool withCnpj = true) => new()
     {
         Id = Guid.NewGuid(),
@@ -89,10 +92,18 @@ public class CompanyServiceTests : ServiceBaseTests
         Cnpj = withCnpj ? CreateFakeCnpj() : null
     };
 
-    private Company CreateCompany() => new(
-        Faker.Company.CompanyName(),
-        CreateFakeCnpj()
-    );
+    private Company CreateCompany() => GenerateCompanies(1).First();
+
+    private List<Company> GenerateCompanies(int quantity)
+    {
+        var companies = new Faker<Company>("en_US")
+            .CustomInstantiator(c => new Company(
+                name: Faker.Company.CompanyName(),
+                cnpj: CreateFakeCnpj()
+            ));
+
+        return companies.Generate(quantity);
+    }
 
     private string CreateFakeCnpj() => Faker.Company.Cnpj(includeFormatSymbols: false);
 }

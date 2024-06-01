@@ -8,7 +8,7 @@ public class DtoToDomainMappingProfile : Profile
     public DtoToDomainMappingProfile()
     {
         CreateMap<CompanyDto, Company>()
-            .ForMember(c => c.Id, act => act.Ignore())
+            .ForMember(dest => dest.Id, opt => opt.Condition(src => src.Id != Guid.Empty))
             .ConstructUsing(src => src.Cnpj != null ? new(src.Name, src.Cnpj) : new(src.Name));
     }
 }

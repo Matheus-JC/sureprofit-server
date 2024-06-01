@@ -1,4 +1,3 @@
-using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using SureProfit.Application;
 using SureProfit.Application.Notifications;
@@ -9,6 +8,13 @@ namespace SureProfit.Api.Controllers.V1;
 public class CompanyController(ICompanyService companyService, INotifier notifier) : MainController(notifier)
 {
     private readonly ICompanyService _companyService = companyService;
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<CompanyDto>>> GetAll()
+    {
+        var companies = await _companyService.GetAllAsync();
+        return Ok(companies);
+    }
 
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<CompanyDto>> GetById(Guid id)
@@ -27,17 +33,54 @@ public class CompanyController(ICompanyService companyService, INotifier notifie
     public async Task<ActionResult> Create(CompanyDto companyDto)
     {
         if (!ModelState.IsValid)
+        {
             return HandleBadRequest(ModelState);
+        }
 
-        var Id = await _companyService.CreateAsync(companyDto);
+        companyDto.Id = await _companyService.CreateAsync(companyDto);
 
-        if (IsOperationInvalid() || Id is null)
+        if (IsOperationInvalid())
         {
             return HandleBadRequest();
         }
 
-        companyDto.Id = Id;
+        return CreatedAtAction("GetById", new { id = companyDto.Id }, companyDto);
+    }
 
-        return CreatedAtAction("GetById", new { id = Id }, companyDto);
+    [HttpPut("{id:guid}")]
+    public async Task<ActionResult> Update(Guid id, CompanyDto companyDto)
+    {
+        if (!ModelState.IsValid)
+        {
+            return HandleBadRequest(ModelState);
+        }
+
+        if (companyDto.Id != id)
+        {
+            Notify("Route and object ids are not the same");
+            return HandleBadRequest();
+        }
+
+        await _companyService.UpdateAsync(companyDto);
+
+        if (IsOperationInvalid())
+        {
+            return HandleBadRequest();
+        }
+
+        return Ok();
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<ActionResult> Delete(Guid id)
+    {
+        await _companyService.DeleteAsync(id);
+
+        if (IsOperationInvalid())
+        {
+            return HandleBadRequest();
+        }
+
+        return NoContent();
     }
 }

@@ -11,7 +11,7 @@ public abstract class Repository<TEntity>(ApplicationDbContext context)
     protected readonly ApplicationDbContext Db = context;
     protected readonly DbSet<TEntity> DbSet = context.Set<TEntity>();
 
-    public virtual async Task<IEnumerable<TEntity?>> GetAllAsync()
+    public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
     {
         return await DbSet.AsNoTracking().ToListAsync();
     }
@@ -36,7 +36,7 @@ public abstract class Repository<TEntity>(ApplicationDbContext context)
         DbSet.Update(entity);
     }
 
-    public virtual void Remove(TEntity entity)
+    public virtual void Delete(TEntity entity)
     {
         DbSet.Remove(entity);
     }

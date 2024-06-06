@@ -9,5 +9,7 @@ public class DomainToDtoMappingProfile : Profile
     {
         CreateMap<Company, CompanyDto>()
             .ForMember(dest => dest.Cnpj, opt => opt.MapFrom(src => src.Cnpj != null ? src.Cnpj.Value : null));
+
+        CreateMap<Store, StoreDto>();
     }
 }

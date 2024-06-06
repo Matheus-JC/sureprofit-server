@@ -1,6 +1,4 @@
-﻿using SureProfit.Domain.Entities;
-
-namespace SureProfit.Application;
+﻿namespace SureProfit.Application;
 
 public interface ICompanyService : IDisposable
 {

@@ -26,7 +26,7 @@ public class StoreConfiguration : IEntityTypeConfiguration<Store>
 
         builder.HasOne(s => s.Company)
             .WithMany(c => c.Stores)
-            .HasForeignKey("CompanyId");
+            .HasForeignKey(s => s.CompanyId);
 
         builder.HasMany(s => s.Costs)
             .WithOne(c => c.Store);

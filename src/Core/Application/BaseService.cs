@@ -30,11 +30,11 @@ public abstract class BaseService(IUnitOfWork unitOfWork, INotifier notifier, IM
         return await _unitOfWork.CommitAsync();
     }
 
-    protected bool Validate<TValidation, TClass>(TValidation validation, TClass classItem)
+    protected async Task<bool> Validate<TValidation, TClass>(TValidation validation, TClass classItem)
         where TValidation : AbstractValidator<TClass>
         where TClass : class
     {
-        var validationResult = validation.Validate(classItem);
+        var validationResult = await validation.ValidateAsync(classItem);
 
         if (validationResult.IsValid) return true;
 

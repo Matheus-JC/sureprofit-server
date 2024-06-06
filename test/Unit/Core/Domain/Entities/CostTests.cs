@@ -108,7 +108,7 @@ public class CostTests
     public void SetStore_WithValidInput_ShouldSet()
     {
         var cost = CreateCost(GetRandomCostType());
-        var store = new Store(_faker.Company.CompanyName(), _faker.PickRandom<StoreEnviroment>());
+        var store = new Store(Guid.NewGuid(), _faker.Company.CompanyName(), _faker.PickRandom<StoreEnviroment>());
 
         cost.SetStore(store);
 

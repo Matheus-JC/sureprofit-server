@@ -26,6 +26,11 @@ public abstract class Repository<TEntity>(ApplicationDbContext context)
         return await DbSet.AsNoTracking().Where(predicate).ToListAsync();
     }
 
+    public virtual async Task<bool> Exists(Guid id)
+    {
+        return await DbSet.AsNoTracking().AnyAsync(t => t.Id == id);
+    }
+
     public virtual void Create(TEntity entity)
     {
         DbSet.Add(entity);

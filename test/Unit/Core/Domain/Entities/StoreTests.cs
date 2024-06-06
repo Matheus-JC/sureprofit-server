@@ -10,7 +10,7 @@ public class StoreTests
 {
     private readonly Faker _faker = new("en_US");
 
-    private Store CreateStore() => new(name: CreateRandomName(), enviroment: CreateRandomEnviroment());
+    private Store CreateStore() => new(companyId: Guid.NewGuid(), name: CreateRandomName(), enviroment: CreateRandomEnviroment());
     private string CreateRandomName() => _faker.Company.CompanyName();
     private StoreEnviroment CreateRandomEnviroment() => _faker.PickRandom<StoreEnviroment>();
 

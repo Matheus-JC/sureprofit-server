@@ -7,12 +7,12 @@ using SureProfit.Domain.Interfaces.Data;
 namespace SureProfit.Application;
 
 public class CompanyService(ICompanyRepository companyRepository, IUnitOfWork unitOfWork,
-    INotifier notifier, IMapper mapper, ICnpjUniquenessChecker cnpjUniquenessChecker
+    INotifier notifier, IMapper mapper, ICompanyUniquenessChecker companyUniquenessChecker
 )
     : BaseService(unitOfWork, notifier, mapper), ICompanyService
 {
     private readonly ICompanyRepository _companyRepository = companyRepository;
-    private readonly ICnpjUniquenessChecker _cnpjUniquenessChecker = cnpjUniquenessChecker;
+    private readonly ICompanyUniquenessChecker _companyUniquenessChecker = companyUniquenessChecker;
 
     public async Task<IEnumerable<CompanyDto>> GetAllAsync()
     {
@@ -28,16 +28,17 @@ public class CompanyService(ICompanyRepository companyRepository, IUnitOfWork un
 
     public async Task<Guid> CreateAsync(CompanyDto companyDto)
     {
-        if (!Validate(new CompanyDtoValidator(), companyDto))
+        if (!await Validate(new CompanyDtoValidator(_companyRepository, validateId: false), companyDto))
         {
             return Guid.Empty;
         }
 
+        companyDto.Id = Guid.Empty;
         var company = _mapper.Map<Company>(companyDto);
 
         if (company.Cnpj is not null)
         {
-            await _cnpjUniquenessChecker.Check(company.Cnpj);
+            await _companyUniquenessChecker.CheckCnpj(company);
         }
 
         _companyRepository.Create(company);
@@ -49,12 +50,18 @@ public class CompanyService(ICompanyRepository companyRepository, IUnitOfWork un
 
     public async Task UpdateAsync(CompanyDto companyDto)
     {
-        if (!Validate(new CompanyDtoValidator(), companyDto))
+        if (!await Validate(new CompanyDtoValidator(_companyRepository, validateId: true), companyDto))
         {
             return;
         }
 
         var company = _mapper.Map<Company>(companyDto);
+
+        if (company.Cnpj is not null)
+        {
+            await _companyUniquenessChecker.CheckCnpj(company);
+        }
+
         _companyRepository.Update(company);
 
         await CommitAsync();
@@ -77,6 +84,7 @@ public class CompanyService(ICompanyRepository companyRepository, IUnitOfWork un
 
     public void Dispose()
     {
+        _companyRepository.Dispose();
         GC.SuppressFinalize(this);
     }
 }

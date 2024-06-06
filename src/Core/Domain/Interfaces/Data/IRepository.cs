@@ -8,6 +8,7 @@ public interface IRepository<TEntity> : IDisposable where TEntity : Entity
     Task<IEnumerable<TEntity>> GetAllAsync();
     Task<TEntity?> GetByIdAsync(Guid id);
     Task<IEnumerable<TEntity>> Search(Expression<Func<TEntity, bool>> predicate);
+    Task<bool> Exists(Guid Id);
 
     void Create(TEntity entity);
     void Update(TEntity entity);

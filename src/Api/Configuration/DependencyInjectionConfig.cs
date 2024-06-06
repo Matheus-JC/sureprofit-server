@@ -12,12 +12,14 @@ public static class DependencyInjectionConfig
     {
         // Application
         services.AddScoped<ICompanyService, CompanyService>();
+        services.AddScoped<IStoreService, StoreService>();
         services.AddScoped<INotifier, Notifier>();
 
         // Data
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<ICompanyRepository, CompanyRepository>();
-        services.AddScoped<ICnpjUniquenessChecker, CnpjUniquenessChecker>();
+        services.AddScoped<IStoreRepository, StoreRepositoy>();
+        services.AddScoped<ICompanyUniquenessChecker, CompanyUniquenessChecker>();
 
         return services;
     }

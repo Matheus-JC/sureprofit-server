@@ -49,7 +49,7 @@ public class CompanyTests
     public void AddStore_WithValidInput_ShouldAdd()
     {
         var company = CreateCompany();
-        var store = new Store(_faker.Company.CompanyName(), _faker.PickRandom<StoreEnviroment>());
+        var store = new Store(company.Id, _faker.Company.CompanyName(), _faker.PickRandom<StoreEnviroment>());
 
         company.AddStore(store);
 
@@ -60,7 +60,7 @@ public class CompanyTests
     public void RemoveStore_WithValidInput_ShouldRemove()
     {
         var company = CreateCompany();
-        var store = new Store(_faker.Company.CompanyName(), _faker.PickRandom<StoreEnviroment>());
+        var store = new Store(company.Id, _faker.Company.CompanyName(), _faker.PickRandom<StoreEnviroment>());
 
         company.AddStore(store);
 

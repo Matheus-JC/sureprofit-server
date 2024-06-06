@@ -12,6 +12,7 @@ public class CompanyRepository(ApplicationDbContext context) : Repository<Compan
 
     public async Task<Company?> GetByCnpj(Cnpj cnpj)
     {
-        return await _context.Companies.FirstOrDefaultAsync(c => c.Cnpj != null && c.Cnpj.Value == cnpj.Value);
+        return await _context.Companies.AsNoTracking()
+            .FirstOrDefaultAsync(c => c.Cnpj != null && c.Cnpj.Value == cnpj.Value);
     }
 }

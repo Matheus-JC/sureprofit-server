@@ -13,7 +13,7 @@ public class Tag : Entity
         Activate();
     }
 
-    public Tag() { }
+    protected Tag() { }
 
     public void SetName(string name)
     {

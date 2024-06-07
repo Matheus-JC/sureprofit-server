@@ -13,5 +13,8 @@ public class DtoToDomainMappingProfile : Profile
 
         CreateMap<StoreDto, Store>()
             .ForMember(dest => dest.Id, opt => opt.Condition(src => src.Id != Guid.Empty));
+
+        CreateMap<TagDto, Tag>()
+            .ForMember(dest => dest.Id, opt => opt.Condition(src => src.Id != Guid.Empty));
     }
 }

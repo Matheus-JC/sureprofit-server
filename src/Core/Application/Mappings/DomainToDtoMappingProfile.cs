@@ -11,5 +11,7 @@ public class DomainToDtoMappingProfile : Profile
             .ForMember(dest => dest.Cnpj, opt => opt.MapFrom(src => src.Cnpj != null ? src.Cnpj.Value : null));
 
         CreateMap<Store, StoreDto>();
+
+        CreateMap<Tag, TagDto>();
     }
 }

@@ -10,14 +10,13 @@ public class CompanyController(ICompanyService companyService, INotifier notifie
     private readonly ICompanyService _companyService = companyService;
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<CompanyDto>>> GetAll()
+    public async Task<ActionResult<IEnumerable<CompanyDto>>> GetAllAsync()
     {
-        var companies = await _companyService.GetAllAsync();
-        return Ok(companies);
+        return Ok(await _companyService.GetAllAsync());
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<ActionResult<CompanyDto>> GetById(Guid id)
+    public async Task<ActionResult<CompanyDto>> GetByIdAsync(Guid id)
     {
         var company = await _companyService.GetByIdAsync(id);
 

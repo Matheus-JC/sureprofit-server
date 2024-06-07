@@ -13,12 +13,16 @@ public static class DependencyInjectionConfig
         // Application
         services.AddScoped<ICompanyService, CompanyService>();
         services.AddScoped<IStoreService, StoreService>();
+        services.AddScoped<ITagService, TagService>();
         services.AddScoped<INotifier, Notifier>();
 
         // Data
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<ICompanyRepository, CompanyRepository>();
         services.AddScoped<IStoreRepository, StoreRepositoy>();
+        services.AddScoped<ITagRepository, TagRepository>();
+
+        // Domain
         services.AddScoped<ICompanyUniquenessChecker, CompanyUniquenessChecker>();
 
         return services;

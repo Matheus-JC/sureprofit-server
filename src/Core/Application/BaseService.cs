@@ -25,11 +25,6 @@ public abstract class BaseService(IUnitOfWork unitOfWork, INotifier notifier, IM
         _notifier.Handle(new Notification(message));
     }
 
-    public async Task<bool> CommitAsync()
-    {
-        return await _unitOfWork.CommitAsync();
-    }
-
     protected async Task<bool> Validate<TValidation, TClass>(TValidation validation, TClass classItem)
         where TValidation : AbstractValidator<TClass>
         where TClass : class
@@ -41,5 +36,10 @@ public abstract class BaseService(IUnitOfWork unitOfWork, INotifier notifier, IM
         Notify(validationResult);
 
         return false;
+    }
+
+    public async Task<bool> CommitAsync()
+    {
+        return await _unitOfWork.CommitAsync();
     }
 }

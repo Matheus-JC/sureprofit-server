@@ -16,5 +16,8 @@ public class DtoToDomainMappingProfile : Profile
 
         CreateMap<TagDto, Tag>()
             .ForMember(dest => dest.Id, opt => opt.Condition(src => src.Id != Guid.Empty));
+
+        CreateMap<CostDto, Cost>()
+            .ForMember(dest => dest.Id, opt => opt.Condition(src => src.Id != Guid.Empty));
     }
 }

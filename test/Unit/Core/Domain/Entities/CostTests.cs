@@ -126,9 +126,13 @@ public class CostTests
         cost.Tag.Should().Be(tag);
     }
 
-    private Cost CreateCost(CostType costType) => new(description: GenerateRandomDescription(), GenerateRandomValue(costType), costType);
+    private Cost CreateCost(CostType costType) => new(storeId: Guid.NewGuid(), description: GenerateRandomDescription(),
+        value: GenerateRandomValue(costType), costType);
+
     private string GenerateRandomDescription() => _faker.Random.String(5, 15);
+
     private decimal GenerateRandomValue(CostType costType) =>
         costType == CostType.Fixed ? _faker.Random.Decimal(0) : _faker.Random.Decimal(0, 100);
+
     private CostType GetRandomCostType() => _faker.PickRandom<CostType>();
 }

@@ -11,17 +11,16 @@ public class CompanyDtoValidator : AbstractValidator<CompanyDto>
         if (validateId)
         {
             RuleFor(s => s.Id)
-                .NotNull().WithMessage("{PropertyName} is required")
-                .NotEqual(Guid.Empty).WithMessage("{PropertyName} is invalid")
+                .NotNull()
+                .NotEqual(Guid.Empty)
                 .MustAsync((id, cancellation) => companyRepository.Exists(id)).WithMessage("{PropertyName} informed does not exist");
         }
 
         RuleFor(c => c.Name)
-            .NotEmpty().WithMessage("{PropertyName} cannot be empty")
-            .Length(2, 250).WithMessage("{PropertyName} must be between {MinLength} and {MaxLength} characters");
+            .NotEmpty()
+            .Length(2, 250);
 
         RuleFor(c => c.Cnpj == null || Cnpj.IsValid(c.Cnpj))
-            .Equal(true)
-            .WithMessage("CNPJ is invalid");
+            .Equal(true).WithMessage("CNPJ is invalid");
     }
 }

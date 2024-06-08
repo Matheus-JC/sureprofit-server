@@ -5,7 +5,7 @@ using SureProfit.Application.Notifications;
 
 namespace SureProfit.Api;
 
-[Route("api/v{version:apiVersion}/[controller]")]
+[Route(Routes.Base)]
 public class StoreController(IStoreService storeService, INotifier notifier) : MainController(notifier)
 {
     private readonly IStoreService _storeService = storeService;

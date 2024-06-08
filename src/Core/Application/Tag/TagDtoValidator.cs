@@ -10,16 +10,16 @@ public class TagDtoValidator : AbstractValidator<TagDto>
         if (validateId)
         {
             RuleFor(t => t.Id)
-                .NotNull().WithMessage("{PropertyName} is required")
-                .NotEqual(Guid.Empty).WithMessage("{PropertyName} cannot be empty")
+                .NotNull()
+                .NotEqual(Guid.Empty)
                 .MustAsync((id, canceletion) => tagRepository.Exists(id)).WithMessage("{PropertyName} informed does not exist");
         }
 
         RuleFor(t => t.Name)
-            .NotEmpty().WithMessage("{PropertyName} cannot be empty")
-            .Length(2, 50).WithMessage("{PropertyName} must be between {MinLength} and {MaxLength} characters");
+            .NotEmpty()
+            .Length(2, 50);
 
         RuleFor(t => t.Active)
-            .NotNull().WithMessage("{PropertyName} is required");
+            .NotNull();
     }
 }

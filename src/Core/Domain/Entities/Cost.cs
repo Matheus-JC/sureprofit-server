@@ -8,7 +8,7 @@ public class Cost : Entity
     public decimal Value { get; private set; }
     public CostType Type { get; private set; }
 
-    public Guid TagId { get; private set; }
+    public Guid? TagId { get; private set; }
     public Tag? Tag { get; private set; }
 
     public Guid StoreId { get; private set; }
@@ -20,12 +20,6 @@ public class Cost : Entity
         SetDescription(description);
         SetValue(value);
         SetStoredId(storeId);
-    }
-
-    public Cost(Guid storeId, string description, decimal value, CostType type, Tag tag)
-        : this(storeId, description, value, type)
-    {
-        SetTag(tag);
     }
 
     protected Cost() { }
@@ -65,5 +59,12 @@ public class Cost : Entity
     public void SetTag(Tag tag)
     {
         Tag = tag;
+        SetTagId(tag.Id);
+    }
+
+    public void SetTagId(Guid tagId)
+    {
+        AssertionConcern.AssertArgumentNotEquals(tagId, Guid.Empty, "Tag Id cannot be empty");
+        TagId = tagId;
     }
 }

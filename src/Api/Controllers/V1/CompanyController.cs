@@ -4,7 +4,7 @@ using SureProfit.Application.Notifications;
 
 namespace SureProfit.Api.Controllers.V1;
 
-[Route("api/v{version:apiVersion}/[controller]")]
+[Route(Routes.Base)]
 public class CompanyController(ICompanyService companyService, INotifier notifier) : MainController(notifier)
 {
     private readonly ICompanyService _companyService = companyService;

@@ -13,5 +13,7 @@ public class DomainToDtoMappingProfile : Profile
         CreateMap<Store, StoreDto>();
 
         CreateMap<Tag, TagDto>();
+
+        CreateMap<Cost, CostDto>();
     }
 }

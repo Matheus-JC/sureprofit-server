@@ -6,62 +6,62 @@ using SureProfit.Application.Notifications;
 namespace SureProfit.Api;
 
 [Route(Routes.Base)]
-public class TagController(ITagService tagService, INotifier notifier) : MainController(notifier)
+public class CostController(ICostService costService, INotifier notifier) : MainController(notifier)
 {
-    private readonly ITagService _tagService = tagService;
+    private readonly ICostService _costService = costService;
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<TagDto>>> GetAllAsync()
+    public async Task<ActionResult<IEnumerable<CostDto>>> GetAllAsync()
     {
-        return Ok(await _tagService.GetAllAsync());
+        return Ok(await _costService.GetAllAsync());
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<ActionResult<TagDto>> GetByIdAsync(Guid id)
+    public async Task<ActionResult<CostDto>> GetByIdAsync(Guid id)
     {
-        var tag = await _tagService.GetByIdAsync(id);
+        var costDto = await _costService.GetByIdAsync(id);
 
-        if (tag is null)
+        if (costDto is null)
         {
-            return NotFound("Tag not found");
+            return NotFound("Cost not found");
         }
 
-        return tag;
+        return Ok(costDto);
     }
 
     [HttpPost]
-    public async Task<ActionResult<TagDto>> CreateAsync(TagDto tagDto)
+    public async Task<ActionResult<CostDto>> CreateAsync(CostDto costDto)
     {
         if (!ModelState.IsValid)
         {
             return HandleBadRequest(ModelState);
         }
 
-        tagDto.Id = await _tagService.CreateAsync(tagDto);
+        costDto.Id = await _costService.CreateAsync(costDto);
 
         if (IsOperationInvalid())
         {
             return HandleBadRequest();
         }
 
-        return CreatedAtAction("GetById", new { id = tagDto.Id }, tagDto);
+        return CreatedAtAction("GetById", new { id = costDto.Id }, costDto);
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<ActionResult> Update(Guid id, TagDto tagDto)
+    public async Task<ActionResult> UpdateAsync(Guid id, CostDto costDto)
     {
         if (!ModelState.IsValid)
         {
             return HandleBadRequest(ModelState);
         }
 
-        if (id != tagDto.Id)
+        if (costDto.Id != id)
         {
             Notify("Route and object ids are not the same");
             return HandleBadRequest();
         }
 
-        await _tagService.UpdateAsync(tagDto);
+        await _costService.UpdateAsync(costDto);
 
         if (IsOperationInvalid())
         {
@@ -74,7 +74,7 @@ public class TagController(ITagService tagService, INotifier notifier) : MainCon
     [HttpDelete("{id:guid}")]
     public async Task<ActionResult> DeleteAsync(Guid id)
     {
-        await _tagService.DeteleAsync(id);
+        await _costService.DeleteAsync(id);
 
         if (IsOperationInvalid())
         {

@@ -33,6 +33,7 @@ public static class DependencyInjectionConfig
         // Domain
         services.AddScoped<ICompanyUniquenessChecker, CompanyUniquenessChecker>();
         services.AddScoped<IMarkupCalculator, MarkupCalculator>();
+        services.AddScoped<IVariableCostTotalRangeChecker, VariableCostTotalRangeChecker>();
 
         return services;
     }

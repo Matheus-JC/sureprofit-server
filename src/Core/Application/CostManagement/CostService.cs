@@ -1,21 +1,21 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using SureProfit.Application.Notifications;
-using SureProfit.Domain;
 using SureProfit.Domain.Entities;
+using SureProfit.Domain.Enums;
 using SureProfit.Domain.Interfaces;
 
 namespace SureProfit.Application.CostManagement;
 
 public class CostService(
     ICostRepository costRepository, IStoreRepository storeRepository, ITagRepository tagRepository,
-    IUnitOfWork unitOfWork, INotifier notifier, IMapper mapper
+    IUnitOfWork unitOfWork, INotifier notifier, IMapper mapper, IVariableCostTotalRangeChecker variableCostTotalRangeChecker
 )
     : BaseService(unitOfWork, notifier, mapper), ICostService
 {
     private readonly ICostRepository _costRepository = costRepository;
     private readonly IStoreRepository _storeRepository = storeRepository;
     private readonly ITagRepository _tagRepository = tagRepository;
+    private readonly IVariableCostTotalRangeChecker _variableCostTotalRangeChecker = variableCostTotalRangeChecker;
 
     public async Task<IEnumerable<CostDto>> GetAllAsync()
     {
@@ -40,6 +40,11 @@ public class CostService(
         costDto.Id = Guid.Empty;
         var cost = _mapper.Map<Cost>(costDto);
 
+        if (cost.Type == CostType.Percentage)
+        {
+            await _variableCostTotalRangeChecker.Check(cost.StoreId, cost);
+        }
+
         _costRepository.Create(cost);
 
         await CommitAsync();
@@ -56,6 +61,11 @@ public class CostService(
         }
 
         var cost = _mapper.Map<Cost>(costDto);
+
+        if (cost.Type == CostType.Percentage)
+        {
+            await _variableCostTotalRangeChecker.Check(cost.StoreId, cost);
+        }
 
         _costRepository.Update(cost);
 

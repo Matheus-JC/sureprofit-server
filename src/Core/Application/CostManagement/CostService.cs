@@ -5,7 +5,7 @@ using SureProfit.Domain;
 using SureProfit.Domain.Entities;
 using SureProfit.Domain.Interfaces.Data;
 
-namespace SureProfit.Application;
+namespace SureProfit.Application.CostManagement;
 
 public class CostService(
     ICostRepository costRepository, IStoreRepository storeRepository, ITagRepository tagRepository,

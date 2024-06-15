@@ -1,5 +1,9 @@
 ﻿using SureProfit.Application;
+using SureProfit.Application.CompanyManagement;
+using SureProfit.Application.CostManagement;
 using SureProfit.Application.Notifications;
+using SureProfit.Application.StoreManagement;
+using SureProfit.Application.TagManagement;
 using SureProfit.Domain;
 using SureProfit.Domain.Interfaces.Data;
 using SureProfit.Infra.Data;

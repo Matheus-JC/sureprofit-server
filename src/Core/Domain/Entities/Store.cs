@@ -9,6 +9,7 @@ public class Store : Entity
     public string Name { get; private set; } = string.Empty;
     public StoreEnviroment Enviroment { get; private set; }
     public decimal? TargetProfit { get; private set; }
+    public decimal? PerItemFee { get; private set; }
     private readonly List<Cost> _costs = [];
     public IReadOnlyCollection<Cost> Costs => _costs;
 
@@ -33,6 +34,12 @@ public class Store : Entity
     {
         AssertionConcern.AssertArgumentRange(targetProfit, 0, 100, "'Target Profit' is percentage and must be between 0 and 100");
         TargetProfit = targetProfit;
+    }
+
+    public void SetPerItemFee(decimal perItemFee)
+    {
+        AssertionConcern.AssertArgumentMinimumValue(perItemFee, 0, "'Target Profit' is percentage and must be between 0 and 100");
+        PerItemFee = perItemFee;
     }
 
     public void SetEnviroment(StoreEnviroment enviroment)

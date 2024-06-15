@@ -1,4 +1,4 @@
-﻿namespace SureProfit.Application;
+﻿namespace SureProfit.Application.CostManagement;
 
 public interface ICostService : IDisposable
 {

@@ -1,8 +1,8 @@
-﻿using System.Security.Authentication;
-using Bogus;
+﻿using Bogus;
 using Bogus.Extensions.Brazil;
 using FluentAssertions;
 using Moq;
+using SureProfit.Application.CompanyManagement;
 using SureProfit.Application.Notifications;
 using SureProfit.Domain;
 using SureProfit.Domain.Entities;

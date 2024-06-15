@@ -4,7 +4,7 @@ using SureProfit.Domain;
 using SureProfit.Domain.Entities;
 using SureProfit.Domain.Interfaces.Data;
 
-namespace SureProfit.Application;
+namespace SureProfit.Application.StoreManagement;
 
 public class StoreService(IStoreRepository storeRepository, ICompanyRepository companyRepository, IUnitOfWork unitOfWork,
     INotifier notifier, IMapper mapper

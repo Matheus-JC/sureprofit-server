@@ -2,7 +2,7 @@
 using SureProfit.Domain.Interfaces.Data;
 using SureProfit.Domain.ValueObjects;
 
-namespace SureProfit.Application;
+namespace SureProfit.Application.CompanyManagement;
 
 public class CompanyDtoValidator : AbstractValidator<CompanyDto>
 {

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using SureProfit.Domain.Interfaces.Data;
 
-namespace SureProfit.Application;
+namespace SureProfit.Application.TagManagement;
 
 public class TagDtoValidator : AbstractValidator<TagDto>
 {

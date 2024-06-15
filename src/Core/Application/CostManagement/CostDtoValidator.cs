@@ -1,9 +1,8 @@
-﻿using System.Data;
-using FluentValidation;
+﻿using FluentValidation;
 using SureProfit.Domain;
 using SureProfit.Domain.Interfaces.Data;
 
-namespace SureProfit.Application;
+namespace SureProfit.Application.CostManagement;
 
 public class CostDtoValidator : AbstractValidator<CostDto>
 {

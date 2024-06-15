@@ -5,7 +5,7 @@ using SureProfit.Domain;
 using SureProfit.Domain.Entities;
 using SureProfit.Domain.Interfaces.Data;
 
-namespace SureProfit.Application;
+namespace SureProfit.Application.TagManagement;
 
 public class TagService(ITagRepository tagRepository, IUnitOfWork unitOfWork, INotifier notifier, IMapper mapper)
     : BaseService(unitOfWork, notifier, mapper), ITagService

@@ -1,6 +1,6 @@
 ﻿using SureProfit.Domain;
 
-namespace SureProfit.Application;
+namespace SureProfit.Application.CostManagement;
 
 public class CostDto
 {

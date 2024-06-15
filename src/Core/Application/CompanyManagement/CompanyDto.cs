@@ -1,4 +1,4 @@
-﻿namespace SureProfit.Application;
+﻿namespace SureProfit.Application.CompanyManagement;
 
 public class CompanyDto
 {

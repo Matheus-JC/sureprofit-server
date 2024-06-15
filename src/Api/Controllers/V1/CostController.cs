@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SureProfit.Api.Controllers.V1;
 using SureProfit.Application;
+using SureProfit.Application.CostManagement;
 using SureProfit.Application.Notifications;
 
 namespace SureProfit.Api;

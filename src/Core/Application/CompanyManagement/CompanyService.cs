@@ -4,7 +4,7 @@ using SureProfit.Domain;
 using SureProfit.Domain.Entities;
 using SureProfit.Domain.Interfaces.Data;
 
-namespace SureProfit.Application;
+namespace SureProfit.Application.CompanyManagement;
 
 public class CompanyService(ICompanyRepository companyRepository, IUnitOfWork unitOfWork,
     INotifier notifier, IMapper mapper, ICompanyUniquenessChecker companyUniquenessChecker

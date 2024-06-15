@@ -20,6 +20,10 @@ public class StoreConfiguration : IEntityTypeConfiguration<Store>
             .HasColumnType("decimal")
             .HasPrecision(18, 2);
 
+        builder.Property(c => c.PerItemFee)
+            .HasColumnType("decimal")
+            .HasPrecision(18, 2);
+
         builder.Property(s => s.Enviroment)
             .HasConversion<int>()
             .IsRequired();

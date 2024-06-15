@@ -1,4 +1,4 @@
-﻿namespace SureProfit.Application;
+﻿namespace SureProfit.Application.StoreManagement;
 
 public interface IStoreService : IDisposable
 {

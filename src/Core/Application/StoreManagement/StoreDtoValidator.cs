@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using SureProfit.Domain.Interfaces.Data;
 
-namespace SureProfit.Application;
+namespace SureProfit.Application.StoreManagement;
 
 public class StoreDtoValidator : AbstractValidator<StoreDto>
 {
@@ -30,5 +30,8 @@ public class StoreDtoValidator : AbstractValidator<StoreDto>
 
         RuleFor(s => s.TargetProfit)
             .InclusiveBetween(0, 100);
+
+        RuleFor(s => s.PerItemFee)
+            .GreaterThan(0);
     }
 }

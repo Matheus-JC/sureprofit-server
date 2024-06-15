@@ -1,4 +1,4 @@
-﻿namespace SureProfit.Application;
+﻿namespace SureProfit.Application.TagManagement;
 
 public interface ITagService : IDisposable
 {

@@ -2,6 +2,7 @@
 using SureProfit.Api.Controllers.V1;
 using SureProfit.Application;
 using SureProfit.Application.Notifications;
+using SureProfit.Application.StoreManagement;
 
 namespace SureProfit.Api;
 

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SureProfit.Domain.Entities;
 
-namespace SureProfit.Infra.Data;
+namespace SureProfit.Infra.Data.Configurations;
 
 public class StoreConfiguration : IEntityTypeConfiguration<Store>
 {
@@ -30,7 +30,8 @@ public class StoreConfiguration : IEntityTypeConfiguration<Store>
 
         builder.HasOne(s => s.Company)
             .WithMany(c => c.Stores)
-            .HasForeignKey(s => s.CompanyId);
+            .HasForeignKey(s => s.CompanyId)
+            .IsRequired();
 
         builder.HasMany(s => s.Costs)
             .WithOne(c => c.Store);

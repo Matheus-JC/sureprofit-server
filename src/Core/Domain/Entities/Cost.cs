@@ -1,4 +1,5 @@
 ﻿using SureProfit.Domain.Common;
+using SureProfit.Domain.Enums;
 
 namespace SureProfit.Domain.Entities;
 

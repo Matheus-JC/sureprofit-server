@@ -5,7 +5,7 @@ using SureProfit.Application.StoreManagement;
 using SureProfit.Application.TagManagement;
 using SureProfit.Domain.Entities;
 
-namespace SureProfit.Application;
+namespace SureProfit.Application.Mappings;
 
 public class DtoToDomainMappingProfile : Profile
 {

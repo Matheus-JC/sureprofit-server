@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using SureProfit.Application;
 using SureProfit.Application.CompanyManagement;
 using SureProfit.Application.Notifications;
 

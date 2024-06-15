@@ -9,7 +9,7 @@ public class Store : Entity
     public string Name { get; private set; } = string.Empty;
     public StoreEnviroment Enviroment { get; private set; }
     public decimal? TargetProfit { get; private set; }
-    public decimal? PerItemFee { get; private set; }
+    public decimal PerItemFee { get; private set; }
     private readonly List<Cost> _costs = [];
     public IReadOnlyCollection<Cost> Costs => _costs;
 

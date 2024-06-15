@@ -1,5 +1,5 @@
 ﻿using SureProfit.Domain.Entities;
 
-namespace SureProfit.Domain.Interfaces.Data;
+namespace SureProfit.Domain.Interfaces;
 
 public interface ITagRepository : IRepository<Tag>;

@@ -5,8 +5,10 @@ using SureProfit.Application.Notifications;
 using SureProfit.Application.StoreManagement;
 using SureProfit.Application.TagManagement;
 using SureProfit.Domain;
-using SureProfit.Domain.Interfaces.Data;
-using SureProfit.Infra.Data;
+using SureProfit.Domain.Interfaces;
+using SureProfit.Domain.Services;
+using SureProfit.Infra.Data.Repositories;
+using SureProfit.Infra.Data.UnitOfWork;
 
 namespace SureProfit.Api.Configuration;
 
@@ -30,6 +32,7 @@ public static class DependencyInjectionConfig
 
         // Domain
         services.AddScoped<ICompanyUniquenessChecker, CompanyUniquenessChecker>();
+        services.AddScoped<IMarkupCalculator, MarkupCalculator>();
 
         return services;
     }

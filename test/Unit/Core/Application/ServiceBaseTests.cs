@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using AutoMapper;
+﻿using AutoMapper;
 using Bogus;
 using Moq.AutoMock;
 using SureProfit.Application.Mappings;

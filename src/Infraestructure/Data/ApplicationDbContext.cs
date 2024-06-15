@@ -8,7 +8,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 {
     public DbSet<Company> Companies { get; set; }
     public DbSet<Store> Stores { get; set; }
-    public DbSet<Company> Costs { get; set; }
+    public DbSet<Cost> Costs { get; set; }
     public DbSet<Tag> Tags { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -2,7 +2,7 @@
 using SureProfit.Application.Notifications;
 using SureProfit.Domain;
 using SureProfit.Domain.Entities;
-using SureProfit.Domain.Interfaces.Data;
+using SureProfit.Domain.Interfaces;
 
 namespace SureProfit.Application.CompanyManagement;
 

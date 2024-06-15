@@ -1,8 +1,8 @@
 ﻿using SureProfit.Domain.Common;
 using SureProfit.Domain.Entities;
-using SureProfit.Domain.Interfaces.Data;
+using SureProfit.Domain.Interfaces;
 
-namespace SureProfit.Domain;
+namespace SureProfit.Domain.Services;
 
 public class CompanyUniquenessChecker(ICompanyRepository companyRepository) : ICompanyUniquenessChecker
 {

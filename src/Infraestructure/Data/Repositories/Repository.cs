@@ -1,14 +1,14 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using SureProfit.Domain.Common;
-using SureProfit.Domain.Interfaces.Data;
+using SureProfit.Domain.Interfaces;
 
 namespace SureProfit.Infra.Data.Repositories;
 
 public abstract class Repository<TEntity>(ApplicationDbContext context)
     : IRepository<TEntity> where TEntity : Entity
 {
-    protected readonly ApplicationDbContext Db = context;
+    protected readonly ApplicationDbContext _context = context;
     protected readonly DbSet<TEntity> DbSet = context.Set<TEntity>();
 
     public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
@@ -48,12 +48,12 @@ public abstract class Repository<TEntity>(ApplicationDbContext context)
 
     public async Task<int> SaveChangesAsync()
     {
-        return await Db.SaveChangesAsync();
+        return await _context.SaveChangesAsync();
     }
 
     public virtual void Dispose()
     {
-        Db.Dispose();
+        _context.Dispose();
         GC.SuppressFinalize(this);
     }
 

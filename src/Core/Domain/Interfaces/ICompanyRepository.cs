@@ -1,7 +1,7 @@
 using SureProfit.Domain.Entities;
 using SureProfit.Domain.ValueObjects;
 
-namespace SureProfit.Domain.Interfaces.Data;
+namespace SureProfit.Domain.Interfaces;
 
 public interface ICompanyRepository : IRepository<Company>
 {

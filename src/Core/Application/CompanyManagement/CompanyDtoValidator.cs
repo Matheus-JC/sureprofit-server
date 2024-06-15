@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using SureProfit.Domain.Interfaces.Data;
+using SureProfit.Domain.Interfaces;
 using SureProfit.Domain.ValueObjects;
 
 namespace SureProfit.Application.CompanyManagement;

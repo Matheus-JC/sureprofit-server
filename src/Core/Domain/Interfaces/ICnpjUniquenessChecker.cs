@@ -1,6 +1,6 @@
 ﻿using SureProfit.Domain.Entities;
 
-namespace SureProfit.Domain;
+namespace SureProfit.Domain.Interfaces;
 
 public interface ICompanyUniquenessChecker
 {

@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SureProfit.Api.Controllers.V1;
-using SureProfit.Application;
 using SureProfit.Application.CostManagement;
 using SureProfit.Application.Notifications;
 
-namespace SureProfit.Api;
+namespace SureProfit.Api.Controllers.V1;
 
 [Route(Routes.Base)]
 public class CostController(ICostService costService, INotifier notifier) : MainController(notifier)

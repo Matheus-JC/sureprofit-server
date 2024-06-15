@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using SureProfit.Domain.Common;
 
-namespace SureProfit.Domain.Interfaces.Data;
+namespace SureProfit.Domain.Interfaces;
 
 public interface IRepository<TEntity> : IDisposable where TEntity : Entity
 {

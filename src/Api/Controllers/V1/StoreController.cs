@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SureProfit.Api.Controllers.V1;
-using SureProfit.Application;
+using SureProfit.Application.CostManagement;
 using SureProfit.Application.Notifications;
 using SureProfit.Application.StoreManagement;
 
-namespace SureProfit.Api;
+namespace SureProfit.Api.Controllers.V1;
 
 [Route(Routes.Base)]
 public class StoreController(IStoreService storeService, INotifier notifier) : MainController(notifier)
@@ -22,9 +21,9 @@ public class StoreController(IStoreService storeService, INotifier notifier) : M
     {
         var store = await _storeService.GetByIdAsync(id);
 
-        if (store is null)
+        if (IsOperationInvalid())
         {
-            return NotFound("Store not found");
+            return HandleBadRequest();
         }
 
         return Ok(store);
@@ -83,5 +82,24 @@ public class StoreController(IStoreService storeService, INotifier notifier) : M
         }
 
         return NoContent();
+    }
+
+    [HttpGet("{storeId:guid}/cost")]
+    public async Task<ActionResult<IEnumerable<CostDto>>> GetVariableCostsByStoreAsync(Guid storeId)
+    {
+        return Ok(await _storeService.GetVariableCostsByStore(storeId));
+    }
+
+    [HttpGet("{storeId:guid}/markup-multiplier")]
+    public async Task<ActionResult<decimal>> CalculateMarkupMultiplierAsync(Guid storeId)
+    {
+        var markupMultiplier = await _storeService.CalculateMarkupMultiplier(storeId);
+
+        if (IsOperationInvalid())
+        {
+            return HandleBadRequest();
+        }
+
+        return Ok(markupMultiplier);
     }
 }

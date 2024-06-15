@@ -9,6 +9,6 @@ public class StoreDto
     public required string Name { get; set; }
     public required StoreEnviroment Enviroment { get; set; }
     public decimal? TargetProfit { get; set; }
-    public decimal? PerItemFee { get; set; }
+    public decimal PerItemFee { get; set; }
 
 }

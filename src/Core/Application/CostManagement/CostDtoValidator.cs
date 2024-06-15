@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using SureProfit.Domain;
-using SureProfit.Domain.Interfaces.Data;
+using SureProfit.Domain.Enums;
+using SureProfit.Domain.Interfaces;
 
 namespace SureProfit.Application.CostManagement;
 

@@ -1,4 +1,4 @@
-﻿using SureProfit.Domain;
+﻿using SureProfit.Domain.Enums;
 
 namespace SureProfit.Application.CostManagement;
 

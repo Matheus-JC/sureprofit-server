@@ -2,7 +2,7 @@
 using FluentValidation;
 using FluentValidation.Results;
 using SureProfit.Application.Notifications;
-using SureProfit.Domain;
+using SureProfit.Domain.Interfaces;
 
 namespace SureProfit.Application;
 

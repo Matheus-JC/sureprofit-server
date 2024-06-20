@@ -19,14 +19,26 @@ public class StoreController(IStoreService storeService, INotifier notifier) : M
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<StoreDto>> GetByIdAsync(Guid id)
     {
-        var store = await _storeService.GetByIdAsync(id);
+        var storeDto = await _storeService.GetByIdAsync(id);
 
-        if (IsOperationInvalid())
+        if (storeDto is null)
         {
-            return HandleBadRequest();
+            return NotFound("Store not found");
         }
 
-        return Ok(store);
+        return Ok(storeDto);
+    }
+
+    [HttpGet("{storeId:guid}/cost")]
+    public async Task<ActionResult<IEnumerable<CostDto>>> GetVariableCostsByStoreAsync(Guid storeId)
+    {
+        return Ok(await _storeService.GetVariableCostsByStoreAsync(storeId));
+    }
+
+    [HttpGet("gross-profit")]
+    public async Task<ActionResult<IEnumerable<StoreProfitSummariesDto>>> GetStoresProfitSumariesAsync()
+    {
+        return Ok(await _storeService.GetStoresProfitSumariesAsync());
     }
 
     [HttpPost]
@@ -82,12 +94,6 @@ public class StoreController(IStoreService storeService, INotifier notifier) : M
         }
 
         return NoContent();
-    }
-
-    [HttpGet("{storeId:guid}/cost")]
-    public async Task<ActionResult<IEnumerable<CostDto>>> GetVariableCostsByStoreAsync(Guid storeId)
-    {
-        return Ok(await _storeService.GetVariableCostsByStore(storeId));
     }
 
     [HttpGet("{storeId:guid}/markup-multiplier")]

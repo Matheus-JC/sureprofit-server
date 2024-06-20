@@ -90,6 +90,8 @@ public class CostService(
     public void Dispose()
     {
         _costRepository.Dispose();
+        _storeRepository.Dispose();
+        _tagRepository.Dispose();
         GC.SuppressFinalize(this);
     }
 }

@@ -16,6 +16,8 @@ public class DomainToDtoMappingProfile : Profile
 
         CreateMap<Store, StoreDto>();
 
+        CreateMap<Store, StoreProfitSummariesDto>();
+
         CreateMap<Tag, TagDto>();
 
         CreateMap<Cost, CostDto>();

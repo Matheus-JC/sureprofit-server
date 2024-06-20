@@ -31,7 +31,7 @@ public class StoreDtoValidator : AbstractValidator<StoreDto>
         RuleFor(s => s.TargetProfit)
             .InclusiveBetween(0, 100);
 
-        RuleFor(s => s.PerItemFee)
+        RuleFor(s => s.GrossProfit)
             .GreaterThan(0);
     }
 }

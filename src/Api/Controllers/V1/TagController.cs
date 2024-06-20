@@ -18,14 +18,14 @@ public class TagController(ITagService tagService, INotifier notifier) : MainCon
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<TagDto>> GetByIdAsync(Guid id)
     {
-        var tag = await _tagService.GetByIdAsync(id);
+        var tagDto = await _tagService.GetByIdAsync(id);
 
-        if (tag is null)
+        if (tagDto is null)
         {
             return NotFound("Tag not found");
         }
 
-        return tag;
+        return tagDto;
     }
 
     [HttpPost]

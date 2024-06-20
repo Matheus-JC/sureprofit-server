@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using SureProfit.Application.Notifications;
-using SureProfit.Domain;
 using SureProfit.Domain.Entities;
 using SureProfit.Domain.Interfaces;
 
@@ -24,20 +23,19 @@ public class StoreService(IStoreRepository storeRepository, ICompanyRepository c
     public async Task<StoreDto?> GetByIdAsync(Guid id)
     {
         var store = await _storeRepository.GetByIdAsync(id);
-
-        if (store is null)
-        {
-            Notify("Store not found");
-            return null;
-        }
-
         return _mapper.Map<Store?, StoreDto>(store);
     }
 
-    public async Task<IEnumerable<Cost>> GetVariableCostsByStore(Guid storeId)
+    public async Task<IEnumerable<Cost>> GetVariableCostsByStoreAsync(Guid storeId)
     {
         var storeVariableCosts = await _storeRepository.GetVariableCostsByStore(storeId);
         return _mapper.Map<IEnumerable<Cost>>(storeVariableCosts);
+    }
+
+    public async Task<IEnumerable<StoreProfitSummariesDto>> GetStoresProfitSumariesAsync()
+    {
+        var stores = await _storeRepository.GetAllAsync();
+        return _mapper.Map<IEnumerable<StoreProfitSummariesDto>>(stores);
     }
 
     public async Task<Guid> CreateAsync(StoreDto storeDto)
@@ -104,6 +102,7 @@ public class StoreService(IStoreRepository storeRepository, ICompanyRepository c
     public void Dispose()
     {
         _storeRepository.Dispose();
+        _companyRepository.Dispose();
         GC.SuppressFinalize(this);
     }
 }

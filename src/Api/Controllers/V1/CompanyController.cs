@@ -18,14 +18,14 @@ public class CompanyController(ICompanyService companyService, INotifier notifie
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<CompanyDto>> GetByIdAsync(Guid id)
     {
-        var company = await _companyService.GetByIdAsync(id);
+        var companyDto = await _companyService.GetByIdAsync(id);
 
-        if (company is null)
+        if (companyDto is null)
         {
             return NotFound("Company not found");
         }
 
-        return company;
+        return Ok(companyDto);
     }
 
     [HttpPost]

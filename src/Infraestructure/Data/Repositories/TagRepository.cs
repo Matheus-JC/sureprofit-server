@@ -1,6 +1,6 @@
 ﻿using SureProfit.Domain.Entities;
 using SureProfit.Domain.Interfaces;
 
-namespace SureProfit.Infra.Data.Repositories;
+namespace SureProfit.Infraestructure.Data.Repositories;
 
 public class TagRepository(ApplicationDbContext context) : Repository<Tag>(context), ITagRepository;

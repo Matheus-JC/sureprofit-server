@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SureProfit.Domain.Common;
 using SureProfit.Domain.Interfaces;
 
-namespace SureProfit.Infra.Data.Repositories;
+namespace SureProfit.Infraestructure.Data.Repositories;
 
 public abstract class Repository<TEntity>(ApplicationDbContext context)
     : IRepository<TEntity> where TEntity : Entity

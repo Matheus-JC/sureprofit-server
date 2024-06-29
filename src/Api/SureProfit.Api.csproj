@@ -17,8 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Infraestructure\Data\SureProfit.Infra.Data.csproj" />
-    <ProjectReference Include="..\Core\Application\SureProfit.Application.csproj" />
+    <Folder Include="Extensions/Middlewares/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\SureProfit.Application.csproj" />
+    <ProjectReference Include="..\Infraestructure\SureProfit.Infraestructure.csproj" />
   </ItemGroup>
 
 </Project>

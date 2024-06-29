@@ -1,4 +1,4 @@
-﻿namespace SureProfit.Api;
+﻿namespace SureProfit.Api.Models;
 
 public class Routes
 {

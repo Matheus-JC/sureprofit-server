@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SureProfit.Api.Models;
 using SureProfit.Application.CompanyManagement;
 using SureProfit.Application.Notifications;
 
 namespace SureProfit.Api.Controllers.V1;
 
+[Authorize]
 [Route(Routes.Base)]
 public class CompanyController(ICompanyService companyService, INotifier notifier) : MainController(notifier)
 {

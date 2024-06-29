@@ -1,6 +1,6 @@
 ﻿using SureProfit.Domain.Interfaces;
 
-namespace SureProfit.Infra.Data.UnitOfWork;
+namespace SureProfit.Infraestructure.Data.UnitOfWork;
 
 public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork
 {

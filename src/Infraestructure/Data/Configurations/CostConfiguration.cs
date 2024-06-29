@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SureProfit.Domain.Entities;
 
-namespace SureProfit.Infra.Data.Configurations;
+namespace SureProfit.Infraestructure.Data.Configurations;
 
 public class CostConfiguration : IEntityTypeConfiguration<Cost>
 {

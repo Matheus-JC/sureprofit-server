@@ -1,17 +1,15 @@
-using Microsoft.EntityFrameworkCore;
 using SureProfit.Api.Configuration;
 using SureProfit.Api.Configuration.Swagger;
 using SureProfit.Api.Extensions;
 using SureProfit.Application.Mappings;
-using SureProfit.Infra.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnections"));
-});
+builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddDbConfig(builder.Configuration);
+builder.Services.AddIdentityConfig(builder.Configuration);
+builder.Services.AddAuthConfig(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(DomainToDtoMappingProfile), typeof(DtoToDomainMappingProfile));
 
 builder.Services.AddControllers()
@@ -36,6 +34,8 @@ if (app.Environment.IsDevelopment())
 }
 
 // app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

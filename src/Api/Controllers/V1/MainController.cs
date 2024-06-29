@@ -11,6 +11,8 @@ namespace SureProfit.Api.Controllers.V1;
 public class MainController(INotifier notifier) : ControllerBase
 {
     private readonly INotifier _notifier = notifier;
+    protected Guid? UserId { get; set; }
+    protected string? UserName { get; set; }
 
     protected bool IsOperationInvalid()
     {

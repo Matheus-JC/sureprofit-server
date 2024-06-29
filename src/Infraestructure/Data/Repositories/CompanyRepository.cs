@@ -3,7 +3,7 @@ using SureProfit.Domain.Entities;
 using SureProfit.Domain.Interfaces;
 using SureProfit.Domain.ValueObjects;
 
-namespace SureProfit.Infra.Data.Repositories;
+namespace SureProfit.Infraestructure.Data.Repositories;
 
 public class CompanyRepository(ApplicationDbContext context) : Repository<Company>(context), ICompanyRepository
 {

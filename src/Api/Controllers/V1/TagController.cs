@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using SureProfit.Api.Models;
 using SureProfit.Application.Notifications;
 using SureProfit.Application.TagManagement;
 
 namespace SureProfit.Api.Controllers.V1;
 
+[Authorize]
 [Route(Routes.Base)]
 public class TagController(ITagService tagService, INotifier notifier) : MainController(notifier)
 {

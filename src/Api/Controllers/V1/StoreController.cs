@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using SureProfit.Api.Models;
 using SureProfit.Application.CostManagement;
 using SureProfit.Application.Notifications;
 using SureProfit.Application.StoreManagement;
 
 namespace SureProfit.Api.Controllers.V1;
 
+[Authorize]
 [Route(Routes.Base)]
 public class StoreController(IStoreService storeService, INotifier notifier) : MainController(notifier)
 {

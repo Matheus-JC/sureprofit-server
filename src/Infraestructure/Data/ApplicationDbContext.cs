@@ -2,7 +2,7 @@
 using SureProfit.Domain.Common;
 using SureProfit.Domain.Entities;
 
-namespace SureProfit.Infra.Data;
+namespace SureProfit.Infraestructure.Data;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
 {
